@@ -29,7 +29,7 @@ simplepass.open('test/passwd.tmp', function(err) {
 Add user:
 
 ```JavaScript
-var username    = 'user1';
+var username    = 'user';
 var password    = 'pA$$w0rD';
 var permissions = [1, 0, 1, 0, 0, 1, 0];
 
@@ -40,15 +40,15 @@ simplepass.add(username, password, permissions, function(err) {
 ```
 
 
-Authorization:
+Authorisation:
 
 ```JavaScript
-var username = 'user1';
+var username = 'user';
 var password = 'pA$$w0rD';
 var permissions;
 
-// add user
-simplepass.add(username, password, permissions, function(err) {
+// authorise
+simplepass.auth(username, password, function(err, access, permissions) {
     // place your code here
 });
 ```
