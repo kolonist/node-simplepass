@@ -1,0 +1,27 @@
+{
+    "name"       : "simplepass",
+    "version"    : "0.0.1",
+    "description": "Authorisation library based on one plain text file with simple structure",
+    "main"       : "./lib/simplepass.js",
+    "scripts": {
+        "test"      : "rm -f test/passwd.tmp; coffee test/index.coffee",
+        "prepublish": "coffee -cb test/*.coffee; coffee -cb lib/*.coffee"
+    },
+    "repository": {
+        "type": "git",
+        "url" : "https://github.com/kolonist/node-simplepass"
+    },
+    "bugs": {
+        "url": "https://github.com/kolonist/node-simplepass/issues"
+    },
+    "keywords": [
+        "username",
+        "password",
+        "plain",
+        "text",
+        "file",
+        "authorisation"
+    ],
+    "author": "Alexander Zubakov <developer@xinit.ru>",
+    "license": "MIT"
+}
