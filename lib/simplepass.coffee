@@ -27,9 +27,10 @@ re_username = new RegExp(/^[a-zA-Z\d._@-]+$/)
 
 # Crypto constants
 #
-saltlen    = 32    # 32 bytes, 256 bits
-keylen     = 32    # 32 bytes, 256 bits
-iterations = 8192  # iterations count for PBKDF2
+saltlen    = 32       # 32 bytes, 256 bits
+keylen     = 32       # 32 bytes, 256 bits
+iterations = 8192     # iterations count for PBKDF2
+digest     = 'sha512' # HMAC digest algorithm
 
 
 # Object with usernames and passwords with the following structure:
@@ -207,7 +208,7 @@ add = (username, password, permissions, onReady) ->
     crypto.randomBytes saltlen, (err, salt) ->
         if not err?
             # create password hash
-            crypto.pbkdf2 password, salt, iterations, keylen, (err, derivedKey) ->
+            crypto.pbkdf2 password, salt, iterations, keylen, digest, (err, derivedKey) ->
                 if not err?
                     password = derivedKey
 
@@ -285,7 +286,7 @@ updatePassword = (username, password, onReady) ->
         crypto.randomBytes saltlen, (err, salt) ->
             if not err?
                 # create password hash
-                crypto.pbkdf2 password, salt, iterations, keylen, (err, derivedKey) ->
+                crypto.pbkdf2 password, salt, iterations, keylen, digest, (err, derivedKey) ->
                     if not err?
                         passwd[username].password = derivedKey
                         save (err) ->
@@ -347,7 +348,7 @@ updatePermissions = (username, permissions, onReady) ->
 auth = (username, password, onReady) ->
     if passwd[username]?
         # create password hash
-        crypto.pbkdf2 password, passwd[username].salt, iterations, keylen, (err, derivedKey) ->
+        crypto.pbkdf2 password, passwd[username].salt, iterations, keylen, digest, (err, derivedKey) ->
             if not err?
                 onReady(
                     null,
